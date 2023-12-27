@@ -22,7 +22,7 @@ class Usuarios(models.Model ):
 class Certificados(models.Model):
 
     nombre_certificado = models.CharField("nombre del certificado", max_length=255)
-    fecha_certificado = models.DateTimeField("fecha agregado al sistema", auto_now_add=False)
+    fecha_certificado = models.DateField("fecha agregado al sistema", auto_now_add=False)
 
 
     class Meta:
@@ -38,7 +38,7 @@ class Certificados(models.Model):
 
 class certificateUsers(models.Model):
 
-    fecha_realizacion = models.DateTimeField("fecha vencimiento", auto_now_add=False)
+    fecha_realizacion = models.DateField("fecha vencimiento", auto_now_add=False)
     usuarios = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     certificado = models.ForeignKey(Certificados ,on_delete=models.CASCADE)
 

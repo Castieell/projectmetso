@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponse
 import datetime
@@ -8,6 +9,8 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
+from django.http import JsonResponse
+
 
 
 class UsuariosSerializer(serializers.ModelSerializer):
@@ -47,7 +50,26 @@ class Empleados(APIView):
     
 
 class EmpleadosCertificados(APIView):
+
+
+    def getCertificate(self, user_id):
+        certificate = certificateUsers.objects.filter(usuarios_id=user_id)
+        return certificate
+
     def get(self, request, format=None):
-        empleados = certificateUsers.objects.all()
-        serializer = certificateUsersSerializer(empleados, many=True)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        empleados = Usuarios.objects.all()
+        users = []
+        for empleado in empleados:
+            certificates = self.getCertificate(empleado.pk)
+            serializer = UsuariosSerializer(empleado)
+            serializer_certificates = certificateUsersSerializer(certificates, many=True).data
+            certificates_array = []
+            for serializer_certificate in serializer_certificates:
+                certificates_array.append(serializer_certificate['certificado'])
+            users_with_certificate = {
+                'user': serializer.data,
+                'certificate': certificates_array
+            }
+            users.append(users_with_certificate)
+
+        return Response(users, status=status.HTTP_201_CREATED)
