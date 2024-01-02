@@ -10,7 +10,7 @@ class Admin(admin.ModelAdmin):
 
 @admin.register(Certificados)
 class Admin(admin.ModelAdmin):
-    search_fields = ("id", "nombre_certiicado")
+    search_fields = ("id", "nombre_certificado")
     list_display = ("id", "fecha_certificado", "nombre_certificado")
 
 @admin.register(certificateUsers)

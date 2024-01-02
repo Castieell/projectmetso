@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre_certificado', models.CharField(max_length=255, verbose_name='nombre del certificado')),
-                ('fecha_certificado', models.DateTimeField(verbose_name='fecha realizado')),
+                ('fecha_certificado', models.DateField(verbose_name='fecha realizado')),
             ],
             options={
                 'verbose_name': '',
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
             name='certificateUsers',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('fecha_realizacion', models.DateTimeField(verbose_name='fecha realizacion')),
+                ('fecha_realizacion', models.DateField(verbose_name='fecha realizacion')),
                 ('certificado', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='consultasmetso.certificados')),
                 ('usuarios', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='consultasmetso.usuarios')),
             ],
