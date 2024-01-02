@@ -65,6 +65,7 @@ class EmpleadosCertificados(APIView):
             serializer_certificates = certificateUsersSerializer(certificates, many=True).data
             certificates_array = []
             for serializer_certificate in serializer_certificates:
+                serializer_certificate['certificado']['fecha_relizacion'] = serializer_certificate['fecha_realizacion']
                 certificates_array.append(serializer_certificate['certificado'])
             users_with_certificate = {
                 'user': serializer.data,
