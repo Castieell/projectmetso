@@ -38,7 +38,7 @@ class Certificados(models.Model):
 
 class certificateUsers(models.Model):
 
-    fecha_realizacion = models.DateField("fecha vencimiento", auto_now_add=False)
+    fecha_realizacion = models.DateField("fecha vencimiento", auto_now_add=False, null=True, blank=True)
     usuarios = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     certificado = models.ForeignKey(Certificados ,on_delete=models.CASCADE)
 
