@@ -1,13 +1,26 @@
 from django.db import models
 
 
+
+
+
 class Usuarios(models.Model ):
 
     first_last_name = models.CharField("apellido paterno", max_length=255)
     second_last_name = models.CharField("apellido materno", max_length=255)
     name = models.CharField("primer nombre", max_length=255)
-    employee_rut = models.CharField("rut empleado", max_length=255)    
-
+    employee_rut = models.CharField("rut empleado", max_length=255)
+    cargo = models.CharField("cargo del empleado", default = 'no definido', max_length=255)
+    OPCIONES_CONTRATO = [
+        ('base', 'Base'),
+        ('spot', 'Spot'),]
+    contrato = models.CharField(
+        "cargo del empleado",
+        choices=OPCIONES_CONTRATO,
+        default='',  
+        max_length=10,
+    )
+      
 
     class Meta:
         verbose_name = ("")
@@ -34,6 +47,8 @@ class Certificados(models.Model):
 
     def get_absolute_url(self):
         return reverse("_detail", kwargs={"pk": self.pk})
+    
+
 
 
 class certificateUsers(models.Model):

@@ -5,8 +5,8 @@ from consultasmetso.models import Usuarios, Certificados, certificateUsers
 
 @admin.register(Usuarios)
 class Admin(admin.ModelAdmin):
-    search_fields = ("id", "employee_rut", "name", "first_last_name", "second_last_name", )
-    list_display = ("id", "employee_rut", "name", "first_last_name", "second_last_name", )
+    search_fields = ("id", "employee_rut", "name", "first_last_name", "second_last_name", "cargo", "contrato")
+    list_display = ("id", "employee_rut", "name", "first_last_name", "second_last_name", "cargo", "contrato" )
 
 @admin.register(Certificados)
 class Admin(admin.ModelAdmin):
