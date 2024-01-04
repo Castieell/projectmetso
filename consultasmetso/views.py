@@ -10,7 +10,17 @@ from rest_framework import serializers
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render
 
+#def es_usuario_autorizado(user):
+    # Define la lógica para determinar si el usuario está autorizado o no
+    #return user.is_authenticated and user.groups.filter(name='GrupoAutorizado').exists()
+
+#@user_passes_test(es_usuario_autorizado)
+#def mi_vista(request):
+    # Tu lógica de vista aquí
+    #return render(request, 'mi_app/mi-vista/', 'mi_app/certificateUsers/')
 
 
 class UsuariosSerializer(serializers.ModelSerializer):
@@ -40,6 +50,15 @@ def current_datetime(request):
     return HttpResponse(html)
 
 class Empleados(APIView):
+    #authentication_classes = [BasicAuthentication]
+    #permission_classes = [IsAuthenticated]
+    
+    def get(self, request, format=None):
+        empleados = Usuarios.objects.all()
+        serializer = UsuariosSerializer(empleados, many=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+class RecursosHumanos(APIView):
     #authentication_classes = [BasicAuthentication]
     #permission_classes = [IsAuthenticated]
     
